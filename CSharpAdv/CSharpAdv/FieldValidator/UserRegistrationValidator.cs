@@ -52,7 +52,13 @@ namespace CSharpAdv.FieldValidator
         private bool ValidField(int fieldIndex, string fieldValue, string[] fieldArray, out string fieldInvalidMessage)
         {
             fieldInvalidMessage = "";
-
+            FieldConstant.UserRegistrationField userRegistrationField = (FieldConstant.UserRegistrationField)(fieldIndex);
+            switch(userRegistrationField)
+            {
+                case FieldConstant.UserRegistrationField.EmailAddress:
+                    fieldInvalidMessage = (!_requiredValidateFieldDel(fieldValue)) ? $"You must enter a vaule for {Enum.GetName(typeof(FieldConstant.UserRegistrationField), userRegistrationField)}{Environment.NewLine}": "";
+                    break;
+            }
             return (fieldInvalidMessage == "");
         }
     }
